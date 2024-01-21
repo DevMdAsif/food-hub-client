@@ -88,7 +88,7 @@ function Login() {
           </button>
           <p className="text-white mt-2 text-sm">
             Do not have an account?
-            <Link className="text-[#f58220] ml-2" to="/login">
+            <Link className="text-[#f58220] ml-2" to="/singup">
               Register
             </Link>
           </p>

@@ -7,7 +7,7 @@ import Swal from "sweetalert2";
 import SocialLogin from "../../component/socialLogin/SocialLogin";
 import { Link } from "react-router-dom";
 
-function SinUp() {
+function SingUp() {
   const [error, setError] = useState("");
   const [checkbox, setCheckbox] = useState(false);
   const { singUp } = useContext(AuthContext);
@@ -165,4 +165,4 @@ function SinUp() {
   );
 }
 
-export default SinUp;
+export default SingUp;
