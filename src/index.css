@@ -12,3 +12,7 @@
 .social_button {
   @apply inline-flex py-3 px-5  bg-gray-950 hover:bg-slate-800 space-x-2 cursor-pointer duration-500 rounded-lg;
 }
+
+.errorPageBtn {
+  @apply rounded-xl duration-500 border py-2 text-xl border-orange-500;
+}
