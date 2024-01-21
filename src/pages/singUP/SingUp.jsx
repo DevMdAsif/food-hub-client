@@ -4,6 +4,8 @@ import authBg from "../../assets/images/authImg/auth-bg-WWHEDCJO.png";
 import { Checkbox } from "@mui/material";
 import { AuthContext } from "../../firebase/provider/AuthProvider";
 import Swal from "sweetalert2";
+import SocialLogin from "../../component/socialLogin/SocialLogin";
+import { Link } from "react-router-dom";
 
 function SinUp() {
   const [error, setError] = useState("");
@@ -48,7 +50,7 @@ function SinUp() {
   };
   return (
     <div className="h-full flex lg:justify-between bg-gradient-to-t from-[#301e19] via-[#1b1219] to-[#1b1219] pb-24">
-      <div className="md:pt-20 pt-10 mb-5 md:mb-0 lg:ml-20 md:mx-auto mx-5">
+      <div className="pt-10 mb-5 md:mb-0 lg:ml-20 md:mx-auto mx-5">
         <div className="text-center mx-auto ">
           <div className="text-start max-w-md">
             <h3 className="text-4xl text-white font-medium">Register</h3>
@@ -60,7 +62,7 @@ function SinUp() {
         </div>
         <form
           onSubmit={handleSubmit(onSubmit)}
-          className="max-w-md md:mt-14 mt-6"
+          className="max-w-md md:mt-6 mt-6"
         >
           <div className="relative z-0 w-full mb-5 group ">
             <input
@@ -146,7 +148,15 @@ function SinUp() {
           >
             Register Now
           </button>
+
+          <p className="text-white mt-2 text-sm">
+            Already have an account ?
+            <Link className="text-[#f58220] ml-2" to="/login">
+              Login
+            </Link>
+          </p>
         </form>
+        <SocialLogin />
       </div>
       <div className="w-[40%] hidden lg:block">
         <img src={authBg} alt="" />

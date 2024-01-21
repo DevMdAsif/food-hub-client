@@ -1,13 +1,18 @@
 import {
+  FacebookAuthProvider,
+  GoogleAuthProvider,
   createUserWithEmailAndPassword,
   getAuth,
   signInWithEmailAndPassword,
+  signInWithPopup,
 } from "firebase/auth";
 import app from "../conf/configuration";
 import { createContext } from "react";
 
 export const AuthContext = createContext();
 const auth = getAuth(app);
+const googleProvider = new GoogleAuthProvider();
+const facebookProvider = new FacebookAuthProvider();
 
 function AuthProvider({ children }) {
   const singUp = async (email, password) => {
@@ -18,9 +23,21 @@ function AuthProvider({ children }) {
     return await signInWithEmailAndPassword(auth, email, password);
   };
 
+  // social sinin
+
+  const googleSingin = async () => {
+    return await signInWithPopup(auth, googleProvider);
+  };
+
+  const facebookSingin = async () => {
+    return await signInWithPopup(auth, facebookProvider);
+  };
+
   const Provider = {
     singUp,
     login,
+    googleSingin,
+    facebookSingin,
   };
 
   return (
