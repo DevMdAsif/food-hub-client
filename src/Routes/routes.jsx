@@ -3,6 +3,7 @@ import Main from "../Layout/Main";
 import Login from "../pages/login/Login";
 import SingUp from "../pages/singUP/SingUp";
 import ErrorPage from "../pages/error/ErrorPage";
+import Home from "../pages/Home/Home";
 
 const router = createBrowserRouter([
   {
@@ -10,6 +11,10 @@ const router = createBrowserRouter([
     element: <Main />,
     errorElement: <ErrorPage />,
     children: [
+      {
+        path: "/",
+        element: <Home />,
+      },
       {
         path: "/singup",
         element: <SingUp />,
