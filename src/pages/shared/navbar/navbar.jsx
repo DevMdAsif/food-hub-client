@@ -11,7 +11,7 @@ import { CgProfile } from "react-icons/cg";
 import Button from "@mui/material/Button";
 import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
-import logo from "../../../assets/images/Home/logo-light-vHhBX6Zj.png";
+import logo from "../../../assets/images/HomeImg/logo-light-vHhBX6Zj.png";
 import { NavLink } from "react-router-dom";
 import { MdOutlineFavorite } from "react-icons/md";
 import { IoCartOutline } from "react-icons/io5";
@@ -20,11 +20,37 @@ import { Badge } from "@mui/material";
 import { useContext } from "react";
 import { AuthContext } from "../../../firebase/provider/AuthProvider";
 
-const pages = ["home", "dishes", "menu", "contect us"];
+const pages = (
+  <>
+    <NavLink
+      to="/"
+      className={({ isActive }) => (isActive ? "text-[#f58220]" : "")}
+    >
+      home
+    </NavLink>
+    <NavLink
+      to="/deshis"
+      className={({ isActive }) => (isActive ? "text-[#f58220]" : "")}
+    >
+      deshis
+    </NavLink>
+    <NavLink
+      to="/menu"
+      className={({ isActive }) => (isActive ? "text-[#f58220]" : "")}
+    >
+      menu
+    </NavLink>
+    <NavLink
+      to="/contectus"
+      className={({ isActive }) => (isActive ? "text-[#f58220]" : "")}
+    >
+      contect us
+    </NavLink>
+  </>
+);
 
 function Navbar() {
   const { user, LogOut } = useContext(AuthContext);
-  console.log(user);
 
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
@@ -99,11 +125,19 @@ function Navbar() {
                 display: { xs: "block", md: "none" },
               }}
             >
-              {pages.map((page) => (
-                <MenuItem key={page} onClick={handleCloseNavMenu}>
-                  <Typography textAlign="center">{page}</Typography>
-                </MenuItem>
-              ))}
+              <MenuItem
+                onClick={handleCloseNavMenu}
+                sx={{
+                  color: "black",
+                }}
+              >
+                <Typography
+                  className="inline-grid space-y-3 w-40 uppercase font-semibold"
+                  textAlign="center"
+                >
+                  {pages}
+                </Typography>
+              </MenuItem>
             </Menu>
           </Box>
 
@@ -129,24 +163,16 @@ function Navbar() {
               },
             }}
           >
-            {pages.map((page) => (
-              <Button
-                key={page}
-                onClick={handleCloseNavMenu}
-                sx={{
-                  my: 2,
-                  display: "block",
-                  color: "white",
-                }}
-              >
-                <NavLink
-                  to={page}
-                  className={({ isActive }) => (isActive ? "red" : "white")}
-                >
-                  {page}
-                </NavLink>
-              </Button>
-            ))}
+            <Button
+              onClick={handleCloseNavMenu}
+              sx={{
+                my: 2,
+                display: "block",
+                color: "white",
+              }}
+            >
+              <i className="space-x-4 font-semibold"> {pages}</i>
+            </Button>
           </Box>
 
           {user ? (

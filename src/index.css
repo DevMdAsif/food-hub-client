@@ -16,3 +16,6 @@
 .errorPageBtn {
   @apply rounded-xl duration-500 border py-2 text-xl border-orange-500;
 }
+.Active {
+  color: red;
+}
