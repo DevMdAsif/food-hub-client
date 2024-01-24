@@ -1,9 +1,11 @@
+import AboutUs from "./home/AboutUs";
 import Hero from "./home/Hero";
 
 function Home() {
   return (
-    <div>
+    <div className="w-full">
       <Hero />
+      <AboutUs />
     </div>
   );
 }
