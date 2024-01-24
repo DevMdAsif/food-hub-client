@@ -3,7 +3,7 @@ import Navbar from "../pages/shared/navbar/navbar";
 
 function Main() {
   return (
-    <div>
+    <div className="max-w-8xl">
       <Navbar />
       <Outlet />
     </div>
