@@ -219,8 +219,12 @@ function Navbar() {
             </Box>
           ) : (
             <div className="text-[#f58220] font-bold inline-flex md:text-xl">
-              <button className="mr-3">Login</button>
-              <button>Register</button>
+              <Link to="/login">
+                <button className="mr-3">Login</button>
+              </Link>
+              <Link to="/singup">
+                <button>Register</button>
+              </Link>
             </div>
           )}
         </Toolbar>
