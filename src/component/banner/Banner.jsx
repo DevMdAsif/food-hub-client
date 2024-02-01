@@ -1,13 +1,14 @@
-function Banner() {
+function Banner({ header, title }) {
   return (
-    <div className="space-y-4">
-      <div className="bg-[#352018] w-32 text-center rounded-xl text-[#e77b1f]">
-        <h3>About Us</h3>
+    <div className={`space-y-4 ${header === "Menu" ? "text-center" : ""}`}>
+      <div
+        className={`bg-[#352018] w-32  rounded-xl text-[#e77b1f] ${
+          header === "Menu" ? "mx-auto" : ""
+        } `}
+      >
+        <h3 className="text-center">{header}</h3>
       </div>
-
-      <h4 className="text-white text-3xl font-medium ">
-        Where quality food meet Excellent services.
-      </h4>
+      <h4 className="text-white text-3xl font-medium">{title}</h4>
     </div>
   );
 }

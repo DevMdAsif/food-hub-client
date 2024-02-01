@@ -13,7 +13,10 @@ function AboutUs() {
       </div>
       <div className="lg:ml-10">
         <div className="lg:mr-36">
-          <Banner />
+          <Banner
+            header="About Us"
+            title="Where quality food meet Excellent services."
+          />
           <p className="text-[#64748b] mt-5">
             It’s the perfect dining experience where every dish is crafted with
             fresh, high-quality ingredients and served by friendly staff who go.
