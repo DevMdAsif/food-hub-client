@@ -2,6 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
+.primary_btn {
+  @apply bg-[#f58220] text-white py-4 px-5 rounded-full hover:bg-orange-700 duration-700;
+}
+
 .input-style {
   @apply block py-2.5 px-0 w-full text-sm text-white bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-[#f58220];
 }
