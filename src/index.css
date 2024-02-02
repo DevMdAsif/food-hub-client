@@ -16,3 +16,27 @@
 .errorPageBtn {
   @apply rounded-xl duration-500 border py-2 text-xl border-orange-500;
 }
+
+.tab_container {
+  @apply inline-flex items-center  w-40 h-20 rounded-full;
+}
+
+.tab_image {
+  @apply p-2 mx-3 rounded-full;
+}
+
+@layer utilities {
+  .scrollbar::-webkit-scrollbar {
+    width: 20px;
+    height: 7px;
+  }
+
+  .scrollbar::-webkit-scrollbar-track {
+    background: #020617;
+  }
+
+  .scrollbar::-webkit-scrollbar-thumb {
+    background: #f58220;
+    border-radius: 100vh;
+  }
+}
