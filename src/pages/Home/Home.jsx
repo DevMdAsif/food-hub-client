@@ -1,5 +1,6 @@
 import AboutUs from "./home/AboutUs";
 import Hero from "./home/Hero";
+import Testimonials from "./home/Testimonials/Testimonials";
 import Menu from "./home/menu/Menu";
 
 function Home() {
@@ -8,6 +9,7 @@ function Home() {
       <Hero />
       <AboutUs />
       <Menu />
+      <Testimonials />
     </div>
   );
 }
