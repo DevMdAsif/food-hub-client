@@ -14,7 +14,7 @@ import { useState } from "react";
 function Menu() {
   const [buttonActive, setButtonActive] = useState(1);
 
-  const { error, loading, foods } = useFetchData("api/foods");
+  const { error, loading, data: foods } = useFetchData("api/foods");
 
   const coffee = foods.filter((food) => food.category === "Coffee");
   const burger = foods.filter((food) => food.category === "Burger");
