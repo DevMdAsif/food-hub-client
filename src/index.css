@@ -44,3 +44,7 @@
     border-radius: 100vh;
   }
 }
+
+.hover_effcet {
+  @apply cursor-pointer hover:text-[#f58220] duration-700;
+}
