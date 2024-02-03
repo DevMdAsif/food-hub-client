@@ -12,7 +12,7 @@ function AppInfo() {
           </p>
           <button className="primary_btn">Download Now</button>
         </div>
-        <div className="m-10 mb-o">
+        <div className="mx-10 mt-10">
           <img src={appImage} alt="" />
         </div>
       </div>
