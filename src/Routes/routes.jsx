@@ -4,6 +4,7 @@ import Login from "../pages/login/Login";
 import SingUp from "../pages/singUP/SingUp";
 import ErrorPage from "../pages/error/ErrorPage";
 import Home from "../pages/Home/Home";
+import Deshes from "../pages/Deshes/Deshes/Deshes";
 
 const router = createBrowserRouter([
   {
@@ -14,6 +15,10 @@ const router = createBrowserRouter([
       {
         path: "/",
         element: <Home />,
+      },
+      {
+        path: "/deshes",
+        element: <Deshes />,
       },
       {
         path: "/singup",

@@ -29,7 +29,7 @@ const pages = (
       home
     </NavLink>
     <NavLink
-      to="/deshis"
+      to="/deshes"
       className={({ isActive }) => (isActive ? "text-[#f58220]" : "")}
     >
       deshis
