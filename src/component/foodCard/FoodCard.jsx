@@ -1,18 +1,36 @@
-function FoodCard({ item }) {
+import { BsHandbag } from "react-icons/bs";
+import { BsArrowUpRightCircle } from "react-icons/bs";
+
+function FoodCard({ item, menu }) {
   const { name, price, description, image } = item;
 
   return (
-    <div className="border-stone-800 hover:border-orange-500 duration-300 border bg-[#020617] rounded-lg p-3">
+    <div
+      className={`border border-stone-800 relative group hover:border-orange-500 transition duration-300 bg-[#020617] rounded-lg p-3 ${
+        menu ? "pb-16" : ""
+      }`}
+    >
       <img
-        className="h-[255px] md:h-[600px] w-full lg:h-[210px] xl:h-[280px] "
+        className="h-[255px] w-full lg:h-[210px] object-cover rounded-md"
         src={image}
-        alt=""
+        alt={name}
       />
-      <div className="flex justify-between mt-10">
-        <h3 className="text-white text-xl tracking-wide font-bold">{name}</h3>
-        <p className="text-amber-500 font-medium">${price}</p>
+      <div className="flex justify-between items-center mt-4">
+        <h3 className="text-white text-2xl tracking-wide font-bold">{name}</h3>
+        <p className="text-amber-500 text-xl font-medium">${price}</p>
       </div>
-      <p className="text-[#64748b] mt-5">{description}</p>
+      <p className="text-[#64748b] mt-2">{description}</p>
+
+      {menu && (
+        <div className="flex justify-between items-center absolute bottom-3 left-3 right-3">
+          <div className="text-3xl cursor-pointer text-white">
+            <BsArrowUpRightCircle />
+          </div>
+          <button className="inline-flex items-center bg-[#f58220] py-2 px-4 rounded-md">
+            <BsHandbag className="mr-2" /> <span>Add to Cart</span>
+          </button>
+        </div>
+      )}
     </div>
   );
 }
