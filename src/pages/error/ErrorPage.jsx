@@ -1,7 +1,9 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import errorImg from "../../assets/images/errorImg/404.svg";
 
 function ErrorPage() {
+  const navigate = useNavigate();
+
   return (
     <div className="text-center h-screen pb-10">
       <div className="flex justify-center ">
@@ -16,7 +18,10 @@ function ErrorPage() {
       <div className="mt-5 md:space-x-4 md:inline-flex inline-grid">
         {/* todo: error page to what page did he come from. */}
 
-        <button className="errorPageBtn hover:bg-white px-10 hover:text-black text-white bg-[#f58220]">
+        <button
+          className="errorPageBtn hover:bg-white px-10 hover:text-black text-white bg-[#f58220]"
+          onClick={() => navigate(-1 || "/")}
+        >
           Go Back
         </button>
         <Link to="/">
