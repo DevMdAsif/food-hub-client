@@ -2,11 +2,11 @@ import {
   FacebookAuthProvider,
   GoogleAuthProvider,
   createUserWithEmailAndPassword,
-  deleteUser,
   getAuth,
   onAuthStateChanged,
   signInWithEmailAndPassword,
   signInWithPopup,
+  signOut,
 } from "firebase/auth";
 import app from "../conf/configuration";
 import { createContext } from "react";
@@ -22,22 +22,22 @@ function AuthProvider({ children }) {
   const [user, setUser] = useState({});
   const [loading, setLoading] = useState(true);
 
-  const singUp = async (email, password) => {
-    return await createUserWithEmailAndPassword(auth, email, password);
+  const singUp = (email, password) => {
+    return createUserWithEmailAndPassword(auth, email, password);
   };
 
-  const login = async (email, password) => {
-    return await signInWithEmailAndPassword(auth, email, password);
+  const login = (email, password) => {
+    return signInWithEmailAndPassword(auth, email, password);
   };
 
   // social sinin
 
-  const googleSingin = async () => {
-    return await signInWithPopup(auth, googleProvider);
+  const googleSingin = () => {
+    return signInWithPopup(auth, googleProvider);
   };
 
-  const facebookSingin = async () => {
-    return await signInWithPopup(auth, facebookProvider);
+  const facebookSingin = () => {
+    return signInWithPopup(auth, facebookProvider);
   };
 
   // get user
@@ -46,6 +46,9 @@ function AuthProvider({ children }) {
     const unSubscrive = onAuthStateChanged(auth, (user) => {
       setUser(user);
       setLoading(false);
+      return () => {
+        return unSubscrive;
+      };
     });
 
     return () => {
@@ -53,10 +56,8 @@ function AuthProvider({ children }) {
     };
   }, []);
 
-  const currentUser = auth.currentUser;
-
   const LogOut = () => {
-    return deleteUser(currentUser);
+    return signOut(auth);
   };
 
   const Provider = {
