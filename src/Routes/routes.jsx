@@ -6,6 +6,7 @@ import ErrorPage from "../pages/error/ErrorPage";
 import Home from "../pages/Home/Home";
 import Deshes from "../pages/Deshes/Deshes/Deshes";
 import Menu from "../pages/Menu/menu/Menu";
+import ContectUs from "../pages/contectUs/ContectUs";
 
 const router = createBrowserRouter([
   {
@@ -24,6 +25,10 @@ const router = createBrowserRouter([
       {
         path: "/menu",
         element: <Menu />,
+      },
+      {
+        path: "/contectus",
+        element: <ContectUs />,
       },
       {
         path: "/singup",
