@@ -1,23 +1,18 @@
 import { useContext, useState } from "react";
-import { useForm } from "react-hook-form";
 import authBg from "../../assets/images/authImg/auth-bg-WWHEDCJO.png";
-import { Checkbox } from "@mui/material";
 import { AuthContext } from "../../firebase/provider/AuthProvider";
 import SocialLogin from "../../component/socialLogin/SocialLogin";
 import { Link } from "react-router-dom";
+import Form from "../../component/Form/Form";
 
 function Login() {
   const [checkbox, setCheckbox] = useState(false);
   const { login } = useContext(AuthContext);
 
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm();
-  const onSubmit = (data) => {
-    console.log(data);
+  const handleSubmit = async (data) => {
     const { email, password } = data;
+    console.log(email, password);
+
     login(email, password)
       .then((userCredential) => {
         console.log(userCredential);
@@ -25,7 +20,27 @@ function Login() {
       .catch((error) => {
         console.log(error);
       });
+    // try {
+    //   await login(email, password)
+    //     .then((userCredential) => {
+    //       console.log(userCredential);
+    //     })
+    //     .catch((error) => {
+    //       console.log(error);
+    //     });
+    // } catch (error) {
+    //   console.log(error);
+    // }
   };
+
+  const inputData = [
+    { name: "email", type: "email", placeholder: "email" },
+    {
+      name: "password",
+      type: checkbox ? "text" : "password",
+      placeholder: "password",
+    },
+  ];
   return (
     <div className="h-screen flex lg:justify-between bg-gradient-to-t from-[#301e19] via-[#1b1219] to-[#1b1219] pb-24">
       <div className=" pt-10 mb-5 md:mb-0 lg:ml-20 md:mx-auto mx-5">
@@ -37,62 +52,24 @@ function Login() {
             </p>
           </div>
         </div>
-        <form
-          onSubmit={handleSubmit(onSubmit)}
-          className="max-w-md md:mt-14 mt-6"
-        >
-          <div className="relative z-0 w-full mb-5 group">
-            <input
-              {...register("email", { required: true })}
-              type="text"
-              className="input-style peer"
-              placeholder=""
-            />
-            <label className="label-style">Email</label>
-            {errors.password?.type === "required" && (
-              <small className="text-red-500">Email is required</small>
-            )}
-          </div>
-          <div className="relative z-0 w-full mb-5 group">
-            <input
-              {...register("password", {
-                required: true,
-              })}
-              type={checkbox ? "text" : "password"}
-              className="input-style peer"
-              placeholder=""
-            />
-            <label className="label-style">Password</label>
-            {errors.password?.type === "required" && (
-              <small className="text-red-500">password is required</small>
-            )}
-          </div>
-          <p>
-            <Checkbox
-              onChange={() => setCheckbox(!checkbox)}
-              sx={{
-                color: "white",
-                "&.Mui-checked": {
-                  color: "#f58220",
-                },
-              }}
-            />
-            <span className="text-white ">show password</span>
-          </p>
-
-          <button
-            type="submit"
-            className="mt-5 text-white bg-[#f58220] hover:bg-orange-700 focus:outline-none font-medium duration-500 rounded-lg text-base w-full px-5 py-2.5 text-center "
-          >
+        <Form
+          checkbox={checkbox}
+          setCheckbox={setCheckbox}
+          inputData={inputData}
+          onSubmit={handleSubmit}
+          initialValue={{ email: "", password: "" }}
+          buttonText="Login"
+          img={authBg}
+          title="Login"
+          desc="Welcome back! Please enter your details."
+        />
+        <p className="text-white mt-2 text-sm">
+          Already have an account ?
+          <Link className="text-[#f58220] ml-2" to="/login">
             Login
-          </button>
-          <p className="text-white mt-2 text-sm">
-            Do not have an account?
-            <Link className="text-[#f58220] ml-2" to="/singup">
-              Register
-            </Link>
-          </p>
-        </form>
+          </Link>
+        </p>
+
         <SocialLogin />
       </div>
       <div className="w-[40%] hidden lg:block">
