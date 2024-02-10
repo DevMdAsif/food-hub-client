@@ -12,25 +12,17 @@ function Login() {
   const handleSubmit = async (data) => {
     const { email, password } = data;
     console.log(email, password);
-
-    login(email, password)
-      .then((userCredential) => {
-        console.log(userCredential);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-    // try {
-    //   await login(email, password)
-    //     .then((userCredential) => {
-    //       console.log(userCredential);
-    //     })
-    //     .catch((error) => {
-    //       console.log(error);
-    //     });
-    // } catch (error) {
-    //   console.log(error);
-    // }
+    try {
+      await login(email, password)
+        .then((userCredential) => {
+          console.log(userCredential);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   const inputData = [
