@@ -1,8 +1,57 @@
+import { useContext } from "react";
 import { BsHandbag } from "react-icons/bs";
 import { BsArrowUpRightCircle } from "react-icons/bs";
+import { AuthContext } from "../../firebase/provider/AuthProvider";
+import Swal from "sweetalert2";
+import { useLocation, useNavigate } from "react-router-dom";
+import axios from "axios";
 
 function FoodCard({ item, menu }) {
   const { name, price, description, image } = item;
+  const { user } = useContext(AuthContext);
+
+  const location = useLocation();
+  const navigate = useNavigate();
+
+  const handleAddToCart = async (item) => {
+    const { _id, name, price, image } = item;
+    if (user && user.email) {
+      await axios
+        .post("/api/carts", {
+          foodId: _id,
+          name,
+          price,
+          image,
+          user: user.email,
+        })
+        .then((response) => {
+          Swal.fire({
+            position: "center",
+            icon: "success",
+            title: "item added in cart",
+            showConfirmButton: false,
+            timer: 1500,
+          });
+          console.log(response);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    } else {
+      Swal.fire({
+        title: "please login first",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "go to login",
+      }).then((result) => {
+        if (result.isConfirmed) {
+          navigate("/login", { state: { from: location } });
+        }
+      });
+    }
+  };
 
   return (
     <div
@@ -26,7 +75,10 @@ function FoodCard({ item, menu }) {
           <div className="text-3xl cursor-pointer text-white">
             <BsArrowUpRightCircle />
           </div>
-          <button className="inline-flex items-center bg-[#f58220] py-2 px-4 rounded-md">
+          <button
+            onClick={() => handleAddToCart(item)}
+            className="inline-flex items-center bg-[#f58220] text-white py-2 px-4 rounded-md"
+          >
             <BsHandbag className="mr-2" /> <span>Add to Cart</span>
           </button>
         </div>

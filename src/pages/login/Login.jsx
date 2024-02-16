@@ -2,20 +2,29 @@ import { useContext, useState } from "react";
 import authBg from "../../assets/images/authImg/auth-bg-WWHEDCJO.png";
 import { AuthContext } from "../../firebase/provider/AuthProvider";
 import SocialLogin from "../../component/socialLogin/SocialLogin";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import Form from "../../component/Form/Form";
 
 function Login() {
   const [checkbox, setCheckbox] = useState(false);
   const { login } = useContext(AuthContext);
 
+  const location = useLocation();
+  console.log(location);
+  const navigate = useNavigate();
+  const from = location.state?.from?.pathname || "/";
+  console.log(from);
+
   const handleSubmit = async (data) => {
     const { email, password } = data;
-    console.log(email, password);
+
     try {
       await login(email, password)
         .then((userCredential) => {
-          console.log(userCredential);
+          console.log("user info", userCredential);
+          if (userCredential) {
+            navigate(from, { replace: true });
+          }
         })
         .catch((error) => {
           console.log(error);
@@ -57,8 +66,8 @@ function Login() {
         />
         <p className="text-white mt-2 text-sm">
           Already have an account ?
-          <Link className="text-[#f58220] ml-2" to="/login">
-            Login
+          <Link className="text-[#f58220] ml-2" to="/singup">
+            Register
           </Link>
         </p>
 

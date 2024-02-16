@@ -5,12 +5,13 @@ import { Checkbox } from "@mui/material";
 import { AuthContext } from "../../firebase/provider/AuthProvider";
 import Swal from "sweetalert2";
 import SocialLogin from "../../component/socialLogin/SocialLogin";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 function SingUp() {
   const [error, setError] = useState("");
   const [checkbox, setCheckbox] = useState(false);
   const { singUp } = useContext(AuthContext);
+  const navigate = useNavigate();
 
   const {
     register,
@@ -35,6 +36,7 @@ function SingUp() {
             showConfirmButton: false,
             timer: 1500,
           });
+          navigate("/");
         }
         console.log(userCredential);
       })
