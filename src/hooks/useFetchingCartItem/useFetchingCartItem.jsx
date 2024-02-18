@@ -2,23 +2,22 @@ import { useQuery } from "@tanstack/react-query";
 
 import useAuthContext from "../../hooks/usecontext/useAuthContext";
 
-function useFetchingCartItem({url}) {
-    
+function useFetchingCartItem() {
   const { user } = useAuthContext();
-  console.log(user.email);
 
-  const { isLoading, data, error, refetch } = useQuery({
+  const { data, isError, error, refetch, isPending } = useQuery({
     queryKey: ["carts", user?.email],
     queryFn: async () => {
-      const response = await fetch(url);
-      if (!response.ok) {
-        throw new Error("Network response was not ok");
+      try {
+        const response = await fetch("/api/carts");
+        return response.json();
+      } catch (error) {
+        throw new Error("An error occurred while fetching cart items");
       }
-      return response.json();
     },
   });
 
-  return { data, error, refetch, isLoading };
+  return { data, isError, isPending, error, refetch };
 }
 
 export default useFetchingCartItem;

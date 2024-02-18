@@ -50,6 +50,8 @@ const pages = (
 );
 
 function Navbar() {
+    // const { data, error, refetch, isLoading } = useFetchData(`/api/carts`);
+
   const { user, LogOut } = useContext(AuthContext);
 
   const [anchorElNav, setAnchorElNav] = React.useState(null);

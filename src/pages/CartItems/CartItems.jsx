@@ -1,12 +1,12 @@
 import { Link } from "react-router-dom";
-import useFetchData from "../../hooks/FetchData/useFetchData";
 import SubCard from "./SubCard";
 import { useState } from "react";
 import Loading from "../../component/Loading/Loading";
 import TableBody from "../../component/TableBody/TableBody";
+import useFetchingCartItem from "../../hooks/useFetchingCartItem/useFetchingCartItem";
 
 function CartItems() {
-  const { data, error, refetch, isLoading } = useFetchData(`/api/carts`);
+  const { data, isError, isPending, error, refetch } = useFetchingCartItem();
   const [quantityPrice, setQuantityPrice] = useState(null);
 
   const quantityTotalPrice = (price) => {
@@ -14,10 +14,12 @@ function CartItems() {
   };
 
   return (
-    <div className="bg-[#040717]">
-      {error && <p className="text-red-700 text-center">{error}</p>}
-      {isLoading && <Loading />}
-      <div className="h-full  text-white md:px-10 xl:px-10 lg:px-4 px-4 lg:grid space-y-7 lg:space-y-0 lg:grid-cols-3 lg:gap-x-7 pt-10">
+    <div className="bg-[#040717] pt-20">
+      {isError && (
+        <p className="text-red-700 text-center">Error:{error.message}</p>
+      )}
+      {isPending && <Loading />}
+      <div className="h-full text-white md:px-10 xl:px-10 lg:px-4 px-4 lg:grid space-y-7 lg:space-y-0 lg:grid-cols-3 lg:gap-x-7">
         <div className="col-span-2">
           <div className="border border-[#1e293b] text-2xl rounded-t-xl">
             <h2 className="text-start p-5">Shopping Cart</h2>
@@ -31,7 +33,11 @@ function CartItems() {
               </tr>
             </thead>
             {data?.map((item) => (
-              <TableBody key={item._id} item={item} quantityTotalPrice={quantityTotalPrice} />
+              <TableBody
+                key={item._id}
+                item={item}
+                quantityTotalPrice={quantityTotalPrice}
+              />
             ))}
           </table>
           <div className="border border-[#1e293b] p-5 rounded-b-xl">
