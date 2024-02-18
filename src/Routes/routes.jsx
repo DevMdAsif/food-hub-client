@@ -7,6 +7,7 @@ import Home from "../pages/Home/Home";
 import Deshes from "../pages/Deshes/Deshes/Deshes";
 import Menu from "../pages/Menu/menu/Menu";
 import ContectUs from "../pages/contectUs/ContectUs";
+import CartItems from "../pages/CartItems/CartItems";
 
 const router = createBrowserRouter([
   {
@@ -29,6 +30,10 @@ const router = createBrowserRouter([
       {
         path: "/contectus",
         element: <ContectUs />,
+      },
+      {
+        path: "/carts",
+        element: <CartItems />,
       },
       {
         path: "/singup",

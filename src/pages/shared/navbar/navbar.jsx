@@ -178,7 +178,7 @@ function Navbar() {
           {user ? (
             <Box sx={{ flexGrow: 0 }}>
               <div className="inline-flex text-2xl space-x-4 mt-2">
-                <Link to="cart">
+                <Link to="carts">
                   <Badge badgeContent={1} color="warning">
                     <IoCartOutline />
                   </Badge>
