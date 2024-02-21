@@ -10,7 +10,7 @@ function SubCard({ data, quantityPrice }) {
   const total = subTotal + tax;
 
   return (
-    <div className="border border-[#1e293b] w-full p-4 rounded-xl lg:h-2/5">
+    <div className="border border-[#1e293b] w-full p-4 rounded-xl lg:h-[310px]">
       <h2 className="text-xl font-semibold">Cart Total</h2>
       <div className="space-y-3 mt-5">
         <div className="flex justify-between">

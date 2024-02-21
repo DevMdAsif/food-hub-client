@@ -5,10 +5,12 @@ import { AuthContext } from "../../firebase/provider/AuthProvider";
 import Swal from "sweetalert2";
 import { useLocation, useNavigate } from "react-router-dom";
 import axios from "axios";
+import useFetchingCartItem from "../../hooks/useFetchingCartItem/useFetchingCartItem";
 
 function FoodCard({ item, menu }) {
   const { name, price, description, image } = item;
   const { user } = useContext(AuthContext);
+  const { refetch } = useFetchingCartItem();
 
   const location = useLocation();
   const navigate = useNavigate();
@@ -25,14 +27,16 @@ function FoodCard({ item, menu }) {
           user: user.email,
         })
         .then((response) => {
-          Swal.fire({
-            position: "center",
-            icon: "success",
-            title: "item added in cart",
-            showConfirmButton: false,
-            timer: 1500,
-          });
-          console.log(response);
+          if (response.status) {
+            refetch();
+            Swal.fire({
+              position: "center",
+              icon: "success",
+              title: "item added in cart",
+              showConfirmButton: false,
+              timer: 1500,
+            });
+          }
         })
         .catch((error) => {
           console.log(error);

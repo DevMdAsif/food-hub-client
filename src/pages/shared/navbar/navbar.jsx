@@ -19,6 +19,7 @@ import { Link } from "react-router-dom";
 import { Badge } from "@mui/material";
 import { useContext } from "react";
 import { AuthContext } from "../../../firebase/provider/AuthProvider";
+import useFetchingCartItem from "../../../hooks/useFetchingCartItem/useFetchingCartItem";
 
 const pages = (
   <>
@@ -50,7 +51,7 @@ const pages = (
 );
 
 function Navbar() {
-    // const { data, error, refetch, isLoading } = useFetchData(`/api/carts`);
+  const { data } = useFetchingCartItem();
 
   const { user, LogOut } = useContext(AuthContext);
 
@@ -181,7 +182,7 @@ function Navbar() {
             <Box sx={{ flexGrow: 0 }}>
               <div className="inline-flex text-2xl space-x-4 mt-2">
                 <Link to="carts">
-                  <Badge badgeContent={1} color="warning">
+                  <Badge badgeContent={data?.length} color="warning">
                     <IoCartOutline />
                   </Badge>
                 </Link>

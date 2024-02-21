@@ -6,7 +6,7 @@ import TableBody from "../../component/TableBody/TableBody";
 import useFetchingCartItem from "../../hooks/useFetchingCartItem/useFetchingCartItem";
 
 function CartItems() {
-  const { data, isError, isPending, error, refetch } = useFetchingCartItem();
+  const { data, isError, isPending, error } = useFetchingCartItem();
   const [quantityPrice, setQuantityPrice] = useState(null);
 
   const quantityTotalPrice = (price) => {
