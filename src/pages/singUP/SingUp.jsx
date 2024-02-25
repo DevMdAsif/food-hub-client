@@ -6,9 +6,11 @@ import { AuthContext } from "../../firebase/provider/AuthProvider";
 import Swal from "sweetalert2";
 import SocialLogin from "../../component/socialLogin/SocialLogin";
 import { Link, useNavigate } from "react-router-dom";
+import axios from "axios";
 
 function SingUp() {
   const [error, setError] = useState("");
+
   const [checkbox, setCheckbox] = useState(false);
   const { singUp } = useContext(AuthContext);
   const navigate = useNavigate();
@@ -18,36 +20,51 @@ function SingUp() {
     handleSubmit,
     formState: { errors },
   } = useForm();
-  const onSubmit = (data) => {
-    console.log(data);
-    const { name, email, number, password, confirmPassword } = data;
+
+  const onSubmit = async (data) => {
+    const { Name, email, password, confirmPassword } = data;
+
     if (password !== confirmPassword) {
       setError("password dose not match");
       return;
     }
-    singUp(email, password)
-      .then((userCredential) => {
+    // singup using firebase
+
+    await singUp(email, password)
+      .then(async () => {
         setError("");
-        if (userCredential) {
-          Swal.fire({
-            position: "center",
-            icon: "success",
-            title: "sing up successfully",
-            showConfirmButton: false,
-            timer: 1500,
+
+        // singUp in database
+
+        await axios
+          .post("/api/user", {
+            name: Name,
+            email,
+            password,
+          })
+          .then(() => {
+            // singup success tost and navigation
+
+            Swal.fire({
+              position: "center",
+              icon: "success",
+              title: "sing up successfully",
+              showConfirmButton: false,
+              timer: 1500,
+            });
+            navigate("/");
+          })
+          .catch(function (error) {
+            setError(error);
           });
-          navigate("/");
-        }
-        console.log(userCredential);
       })
-      .catch((error) => {
-        if (error) {
-          Swal.fire({
-            icon: "error",
-            title: "Oops...",
-            text: "User already exist",
-          });
-        }
+      .catch(() => {
+        // singup unsuccess tost
+        Swal.fire({
+          icon: "error",
+          title: "Oops...",
+          text: "User already exist",
+        });
       });
   };
   return (
@@ -66,7 +83,8 @@ function SingUp() {
           onSubmit={handleSubmit(onSubmit)}
           className="max-w-md md:mt-6 mt-6"
         >
-          <div className="relative z-0 w-full mb-5 group ">
+          <div className="relative z-0 w-full mb-5 group space-y-2">
+            <label className="text-white uppercase mb-3">Full Name</label>
             <input
               {...register("Name", {
                 required: true,
@@ -74,28 +92,30 @@ function SingUp() {
                 maxLength: 30,
               })}
               type="text"
-              className="input-style peer"
-              placeholder=""
+              className="bg-[#040717] border border-[#1e293b] text-white sm:text-sm rounded-lg block w-full p-2.5 outline-none focus:border-[#f58220] "
+              placeholder="Enter your name"
             />
-            <label className="label-style">Full Name</label>
+
             {errors.password?.type === "required" && (
               <small className="text-red-500">name is required</small>
             )}
           </div>
 
-          <div className="relative z-0 w-full mb-5 group">
+          <div className="relative z-0 w-full mb-5 group space-y-2">
+            <label className="text-white uppercase mb-3">Email</label>
+
             <input
               {...register("email", { required: true })}
               type="text"
-              className="input-style peer"
-              placeholder=""
+              className="bg-[#040717] border border-[#1e293b] text-white sm:text-sm rounded-lg block w-full p-2.5 outline-none focus:border-[#f58220] "
+              placeholder="Enter your email"
             />
-            <label className="label-style">Email</label>
             {errors.password?.type === "required" && (
               <small className="text-red-500">Email is required</small>
             )}
           </div>
-          <div className="relative z-0 w-full mb-5 group">
+          <div className="relative z-0 w-full mb-5 group space-y-2">
+            <label className="text-white uppercase mb-3">Password</label>
             <input
               {...register("password", {
                 required: true,
@@ -103,23 +123,24 @@ function SingUp() {
                   /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[#$@!%&*?])[A-Za-z\d#$@!%&*?]{8,30}$/,
               })}
               type={checkbox ? "text" : "password"}
-              className="input-style peer"
-              placeholder=""
+              className="bg-[#040717] border border-[#1e293b] text-white sm:text-sm rounded-lg block w-full p-2.5 outline-none focus:border-[#f58220] "
+              placeholder="Enter your password"
             />
-            <label className="label-style">Password</label>
             {errors.password?.type === "required" && (
               <small className="text-red-500">password is required</small>
             )}
           </div>
 
-          <div className="relative z-0 w-full mb-5 group">
+          <div className="relative z-0 w-full mb-5 group space-y-2">
+            <label className="text-white uppercase mb-3">
+              Confirm Password
+            </label>
             <input
               {...register("confirmPassword", { required: true })}
               type={checkbox ? "text" : "password"}
-              className="input-style peer"
-              placeholder=""
+              className="bg-[#040717] border border-[#1e293b] text-white sm:text-sm rounded-lg block w-full p-2.5 outline-none focus:border-[#f58220] "
+              placeholder="confirm password"
             />
-            <label className="label-style">Confirm Password</label>
           </div>
           <p>
             <Checkbox
