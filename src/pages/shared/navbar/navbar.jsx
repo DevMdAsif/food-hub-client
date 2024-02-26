@@ -77,6 +77,15 @@ function Navbar() {
     LogOut();
   };
 
+  const Setting = (
+    <>
+      <Link to="/deshbord/myAccount">Profile</Link>
+      <p className="hover_effcet" onClick={() => handleLogOut()}>
+        LogOut
+      </p>
+    </>
+  );
+
   return (
     <AppBar position="static">
       <Container maxWidth="xl" className="bg-[#040717] h-16 lg:h-20">
@@ -214,9 +223,7 @@ function Navbar() {
                 onClose={handleCloseUserMenu}
               >
                 <MenuItem onClick={handleCloseUserMenu}>
-                  <Typography textAlign="center" onClick={() => handleLogOut()}>
-                    LogOut
-                  </Typography>
+                  <div className="inline-grid space-y-2">{Setting}</div>
                 </MenuItem>
               </Menu>
             </Box>

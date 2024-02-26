@@ -8,6 +8,9 @@ import Deshes from "../pages/Deshes/Deshes/Deshes";
 import Menu from "../pages/Menu/menu/Menu";
 import ContectUs from "../pages/contectUs/ContectUs";
 import CartItems from "../pages/CartItems/CartItems";
+import Deshbord from "../Layout/Deshbord";
+import MyAccount from "../Deshbord/MyAccount/MyAccount";
+import MyOrders from "../Deshbord/MyOrders/MyOrders";
 
 const router = createBrowserRouter([
   {
@@ -42,6 +45,20 @@ const router = createBrowserRouter([
       {
         path: "/login",
         element: <Login />,
+      },
+    ],
+  },
+  {
+    path: "/deshbord",
+    element: <Deshbord />,
+    children: [
+      {
+        path: "/deshbord/myAccount",
+        element: <MyAccount />,
+      },
+      {
+        path: "/deshbord/myOrders",
+        element: <MyOrders />,
       },
     ],
   },
