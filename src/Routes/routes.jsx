@@ -10,7 +10,6 @@ import ContectUs from "../pages/contectUs/ContectUs";
 import CartItems from "../pages/CartItems/CartItems";
 import Deshbord from "../Layout/Deshbord";
 import MyAccount from "../Deshbord/MyAccount/MyAccount";
-import MyOrders from "../Deshbord/MyOrders/MyOrders";
 
 const router = createBrowserRouter([
   {
@@ -55,10 +54,6 @@ const router = createBrowserRouter([
       {
         path: "/deshbord/myAccount",
         element: <MyAccount />,
-      },
-      {
-        path: "/deshbord/myOrders",
-        element: <MyOrders />,
       },
     ],
   },

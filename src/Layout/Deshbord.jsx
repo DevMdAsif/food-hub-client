@@ -25,7 +25,9 @@ function ResponsiveDrawer(props) {
   const [mobileOpen, setMobileOpen] = React.useState(false);
   const [isClosing, setIsClosing] = React.useState(false);
 
-  const isAdmin = false;
+  // TODO: conditional see interface . user admin or not
+
+  const isAdmin = true;
 
   const handleDrawerClose = () => {
     setIsClosing(true);
@@ -189,7 +191,7 @@ function ResponsiveDrawer(props) {
           width: { sm: `calc(100% - ${drawerWidth}px)` },
         }}
       >
-        <div className="border-l-2 border-[#1a2434] mt-10">
+        <div className="border-l-2 border-[#1a2434] pt-10 min-h-screen">
           <Outlet />
         </div>
       </Box>
