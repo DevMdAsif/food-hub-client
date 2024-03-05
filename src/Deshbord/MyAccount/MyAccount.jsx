@@ -30,8 +30,6 @@ function MyAccount() {
 
   // Get day
 
-  console.log(selectedDate);
-
   let days;
 
   if (selectedDate) {

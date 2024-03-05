@@ -10,6 +10,9 @@ import ContectUs from "../pages/contectUs/ContectUs";
 import CartItems from "../pages/CartItems/CartItems";
 import Deshbord from "../Layout/Deshbord";
 import MyAccount from "../Deshbord/MyAccount/MyAccount";
+import MyOrders from "../Deshbord/MyOrders/MyOrders";
+import Customers from "../Deshbord/customers/Customers";
+import EditUserInfo from "../Deshbord/customers/EditUserInfo";
 
 const router = createBrowserRouter([
   {
@@ -54,6 +57,18 @@ const router = createBrowserRouter([
       {
         path: "/deshbord/myAccount",
         element: <MyAccount />,
+      },
+      {
+        path: "/deshbord/myOrders",
+        element: <MyOrders />,
+      },
+      {
+        path: "/deshbord/customers",
+        element: <Customers />,
+      },
+      {
+        path: "/deshbord/editCusInfo/:id",
+        element: <EditUserInfo />,
       },
     ],
   },
