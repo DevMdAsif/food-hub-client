@@ -16,8 +16,6 @@ function useFetchData(url) {
         setError(error.message);
       }
     })();
-
-    return () => {};
   }, [url]);
   return { error, loading, data };
 }
