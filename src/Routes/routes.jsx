@@ -13,6 +13,7 @@ import MyAccount from "../Deshbord/MyAccount/MyAccount";
 import MyOrders from "../Deshbord/MyOrders/MyOrders";
 import Customers from "../Deshbord/customers/Customers";
 import EditUserInfo from "../Deshbord/customers/EditUserInfo";
+import AddItem from "../Deshbord/AddItem/AddItem";
 
 const router = createBrowserRouter([
   {
@@ -69,6 +70,10 @@ const router = createBrowserRouter([
       {
         path: "/deshbord/editCusInfo/:id",
         element: <EditUserInfo />,
+      },
+      {
+        path: "/deshbord/additem",
+        element: <AddItem />,
       },
     ],
   },

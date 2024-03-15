@@ -15,7 +15,7 @@ import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import { NavLink, Outlet } from "react-router-dom";
 import { CgProfile } from "react-icons/cg";
-import { FaCarSide } from "react-icons/fa";
+import { FaCarSide, FaUtensils } from "react-icons/fa";
 import { IoPeopleOutline } from "react-icons/io5";
 
 const drawerWidth = 240;
@@ -56,16 +56,20 @@ function ResponsiveDrawer(props) {
           to: "/deshbord/Orders",
           icon: <FaCarSide />,
         },
-
         {
           label: "Customers",
           to: "/deshbord/customers",
           icon: <IoPeopleOutline />,
         },
+        {
+          label: "Add Item",
+          to: "/deshbord/additem",
+          icon: <FaUtensils />,
+        },
       ]
     : [
         {
-          label: "My Account ",
+          label: "My Account",
           to: "/deshbord/myAccount",
           icon: <CgProfile />,
         },

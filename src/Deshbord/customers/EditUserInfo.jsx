@@ -36,7 +36,7 @@ function EditUserInfo() {
           showConfirmButton: false,
           timer: 1500,
         });
-        navigate("/dashboard/customers");
+        navigate("/deshbord/customers");
       }
     } catch (error) {
       setUpdateError(error.message);

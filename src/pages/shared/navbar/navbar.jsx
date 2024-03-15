@@ -79,7 +79,7 @@ function Navbar() {
 
   const Setting = (
     <>
-      <Link to="/deshbord/myAccount">Profile</Link>
+      <Link to="/deshbord/customers">Profile</Link>
       <p className="hover_effcet" onClick={() => handleLogOut()}>
         LogOut
       </p>
