@@ -4,31 +4,34 @@ import { AuthContext } from "../../firebase/provider/AuthProvider";
 import SocialLogin from "../../component/socialLogin/SocialLogin";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import Form from "../../component/Form/Form";
+import axios from "axios";
 
 function Login() {
   const [checkbox, setCheckbox] = useState(false);
   const { login } = useContext(AuthContext);
 
   const location = useLocation();
-  console.log(location);
   const navigate = useNavigate();
   const from = location.state?.from?.pathname || "/";
-  console.log(from);
 
   const handleSubmit = async (data) => {
     const { email, password } = data;
 
     try {
-      await login(email, password)
-        .then((userCredential) => {
-          console.log("user info", userCredential);
-          if (userCredential) {
+      const res = await login(email, password);
+
+      if (res.user.email) {
+        try {
+          const axiosRes = await axios.post(`/api/jwt`, {
+            email: res.user.email,
+          });
+          if (axiosRes.data) {
             navigate(from, { replace: true });
           }
-        })
-        .catch((error) => {
+        } catch (error) {
           console.log(error);
-        });
+        }
+      }
     } catch (error) {
       console.log(error);
     }

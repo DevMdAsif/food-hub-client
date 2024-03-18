@@ -20,6 +20,7 @@ import { Badge } from "@mui/material";
 import { useContext } from "react";
 import { AuthContext } from "../../../firebase/provider/AuthProvider";
 import useFetchingCartItem from "../../../hooks/useFetchingCartItem/useFetchingCartItem";
+import axios from "axios";
 
 const pages = (
   <>
@@ -73,8 +74,16 @@ function Navbar() {
     setAnchorElUser(null);
   };
 
-  const handleLogOut = () => {
-    LogOut();
+  // logout and remove token from cookie and navigate to login page
+
+  const handleLogOut = async () => {
+    LogOut().then(async () => {
+      try {
+        await axios.post("/api/logout");
+      } catch (error) {
+        console.log(error);
+      }
+    });
   };
 
   const Setting = (
